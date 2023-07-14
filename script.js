@@ -21,3 +21,53 @@ $(function () {
   //
   // TODO: Add code to display the current date in the header of the page.
 });
+// let currentTime = dayjs().format("h");
+// // let getTime = `hour-${dayjs().format("h")}`;
+// console.log(currentTime);
+// // console.log(getTime);
+// let getID = $("#hour-4").attr("id");
+// let matchID = getID.charAt(getID.length - 1);
+// console.log(matchID);
+
+// if (currentTime === matchID) {
+//   console.log("==");
+//   $("#hour-4").addClass("present");
+// } else if (currentTime < matchID) {
+//   console.log("<");
+//   var hour_2 = $("#hour-2").addClass("past");
+// } else if (currentTime > match) {
+//   console.log("<");
+//   var hour_5 = $("#hour-5").addClass("future");
+// }
+
+function matchID() {
+  let idList = [
+    $("#hour-9"),
+    $("#hour-10"),
+    $("#hour-11"),
+    $("#hour-12"),
+    $("#hour-1"),
+    $("#hour-2"),
+    $("#hour-3"),
+    $("#hour-4"),
+    $("#hour-5"),
+  ];
+  const currentTime = dayjs().format("h");
+  let timeID = `hour-${currentTime}`;
+  console.log(timeID);
+
+  for (let i = 0; i < idList.length; i++) {
+    console.log(idList[i]);
+    console.log(idList[i].attr("id"));
+    let lastNum = idList[i].attr("id").replace(/[^\d]/g, " ");
+    console.log(lastNum);
+    if (timeID === lastNum) {
+      idList[i].addClass("present");
+    } else if (currentTime < lastNum) {
+      idList[i].addClass("past");
+    } else if (currentTime > lastNum) {
+      idList[i].addClass("future");
+    }
+  }
+}
+matchID();
