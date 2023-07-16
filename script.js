@@ -38,22 +38,22 @@ function matchID() {
   const currentTime = dayjs().format("h");
   let timeID = `hour-${currentTime}`;
   console.log(timeID);
-  let matchCurrentTime=timeID.replace(/[^\d]/g, " ")
+  let matchCurrentTime = parseInt(timeID.replace(/[^\d]/g, " "));
 
   for (let i = 0; i < idList.length; i++) {
     console.log(idList[i]);
     console.log(idList[i].attr("id"));
-    let lastNum = idList[i].attr("id").replace(/[^\d]/g, " ");
+    let lastNum =parseInt(idList[i].attr("id").replace(/[^\d]/g, " "));
     if (lastNum >= 1 && lastNum <= 5) { 
-      lastNum = parseInt(lastNum) + 12
+      lastNum = lastNum + 12
     }
       console.log(`listNumber is ${lastNum}`);
     // if (matchCurrentTime >= 1 && matchCurrentTime <= 5) { 
     //   matchCurrentTime = parseInt(matchCurrentTime) + 12;
     //   console.log(`currnet time is ${matchCurrentTime}`);
     // } 
-if (matchCurrentTime >= 1 && matchCurrentTime <= 9) { 
-      matchCurrentTime = parseInt(matchCurrentTime) + 12;
+    if (matchCurrentTime >= 1 && matchCurrentTime <= 9) { 
+      matchCurrentTime = matchCurrentTime + 12;
       console.log(`currnet time is ${matchCurrentTime}`);
     } 
     if (matchCurrentTime === lastNum) {
@@ -85,11 +85,7 @@ let textarea = document.querySelectorAll('textarea')
 // }
 for (let i = 0; i < btn.length; i++) { 
   btn[i].addEventListener('click', function () { 
-    for (let i = 0; i < textarea.length; i++) { 
-    textarea[i].value;
-      console.log(textarea[i].value);
-      // addP.innerText='textarea[i].value'
-  }
-    // addP.textContent=getContent()
+    // textarea[i].value;
+    addP.innerText = textarea[i].value;
   })
 }
