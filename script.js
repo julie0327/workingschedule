@@ -34,6 +34,7 @@ function matchID() {
     $("#hour-4"),
     $("#hour-5"),
   ];
+  console.log(idList);
   const currentTime = dayjs().format("h");
   let timeID = `hour-${currentTime}`;
   console.log(timeID);
@@ -47,18 +48,48 @@ function matchID() {
       lastNum = parseInt(lastNum) + 12
     }
       console.log(`listNumber is ${lastNum}`);
-    if (matchCurrentTime >= 1 && matchCurrentTime <= 5) { 
+    // if (matchCurrentTime >= 1 && matchCurrentTime <= 5) { 
+    //   matchCurrentTime = parseInt(matchCurrentTime) + 12;
+    //   console.log(`currnet time is ${matchCurrentTime}`);
+    // } 
+if (matchCurrentTime >= 1 && matchCurrentTime <= 9) { 
       matchCurrentTime = parseInt(matchCurrentTime) + 12;
       console.log(`currnet time is ${matchCurrentTime}`);
-    }
+    } 
     if (matchCurrentTime === lastNum) {
-              idList[i].addClass("present");//red
-            } else if (lastNum<matchCurrentTime ) {
-              idList[i].addClass("past");//gray
-            } else if (lastNum>matchCurrentTime ) {
-              idList[i].addClass("future");//green
-            }
+      idList[i].addClass("present");//red
+    } else if (lastNum < matchCurrentTime) {
+      idList[i].addClass("past");//gray
+    } else if (lastNum > matchCurrentTime) {
+      idList[i].addClass("future");//green
+    }
   }
 }
 matchID();
 
+let btn = document.querySelectorAll('button')
+let addP = document.querySelector('#currentDay')
+let textarea = document.querySelectorAll('textarea')
+// let description = document.querySelectorAll('.description')
+// console.log(description);
+// for (let i = 0; i < description.length; i++) { 
+// let inputContent = description[i].values;
+//   console.log(inputContent);
+// }
+// function getContent() { 
+//   for (let i = 0; i < textarea.length; i++) { 
+//     getInfo=textarea[i].value;
+    
+//   }console.log(getInfo[i]);
+  
+// }
+for (let i = 0; i < btn.length; i++) { 
+  btn[i].addEventListener('click', function () { 
+    for (let i = 0; i < textarea.length; i++) { 
+    textarea[i].value;
+      console.log(textarea[i].value);
+      // addP.innerText='textarea[i].value'
+  }
+    // addP.textContent=getContent()
+  })
+}
