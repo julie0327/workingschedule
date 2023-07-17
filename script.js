@@ -21,7 +21,13 @@ $(function () {
   //
   // TODO: Add code to display the current date in the header of the page.
 });
-
+let btn = $('button')
+let addP = $('#currentDay')
+let textarea = document.querySelectorAll('textarea')
+function dispalyTime() { 
+  let current = dayjs().format('MMMM-dddd-YYYY')
+  addP.text(current)
+}
 function matchID() {
   let idList = [
     $("#hour-9"),
@@ -48,10 +54,6 @@ function matchID() {
       lastNum = lastNum + 12
     }
       console.log(`listNumber is ${lastNum}`);
-    // if (matchCurrentTime >= 1 && matchCurrentTime <= 5) { 
-    //   matchCurrentTime = parseInt(matchCurrentTime) + 12;
-    //   console.log(`currnet time is ${matchCurrentTime}`);
-    // } 
     if (matchCurrentTime >= 1 && matchCurrentTime <= 9) { 
       matchCurrentTime = matchCurrentTime + 12;
       console.log(`currnet time is ${matchCurrentTime}`);
@@ -67,25 +69,25 @@ function matchID() {
 }
 matchID();
 
-let btn = document.querySelectorAll('button')
-let addP = document.querySelector('#currentDay')
-let textarea = document.querySelectorAll('textarea')
-// let description = document.querySelectorAll('.description')
-// console.log(description);
-// for (let i = 0; i < description.length; i++) { 
-// let inputContent = description[i].values;
-//   console.log(inputContent);
-// }
-// function getContent() { 
-//   for (let i = 0; i < textarea.length; i++) { 
-//     getInfo=textarea[i].value;
-    
-//   }console.log(getInfo[i]);
-  
-// }
+function renderStorage() { 
+  let storageItem = localStorage.getItem('storageItem');
+
+  return storageItem
+}
+
 for (let i = 0; i < btn.length; i++) { 
-  btn[i].addEventListener('click', function () { 
-    // textarea[i].value;
-    addP.innerText = textarea[i].value;
+  btn[i].addEventListener('click', function (e) { 
+    e.preventDefault();
+    let storageItem = textarea[i].value;
+    localStorage.setItem('storageItem', storageItem);
+    textarea.value = renderStorage();
+    console.log(textarea.value);
+    addP.text(`
+    The item already storages in local storage: 
+    ${renderStorage()}
+    ${dayjs().format('MMMM-dddd-YYYY')}
+    `) 
+ 
   })
 }
+
