@@ -69,25 +69,49 @@ function matchID() {
 }
 matchID();
 
-function renderStorage() { 
-  let storageItem = localStorage.getItem('storageItem');
+// function renderStorage() { 
+//   let storageItem = localStorage.getItem('storageItem');
+//   if (storageItem) {
+//     storageItem = JSON.parse(storageItem)
+//   } else { 
+//     storageItem=[]
+//   }
+//   return storageItem
+// }
 
+function saveStorage() {
+  let storageItem = {
+    todoItem9: textarea[0].value,
+    todoItem10: textarea[1].value,
+    todoItem11: textarea[2].value,
+    todoItem12: textarea[3].value,
+    todoItem1: textarea[4].value,
+    todoItem2: textarea[5].value,
+    todoItem3: textarea[6].value,
+    todoItem4: textarea[7].value,
+    todoItem5: textarea[8].value,
+  };
+  localStorage.setItem('storageItem', JSON.stringify(storageItem));
   return storageItem
 }
-
+function renderStorage() { 
+  let getStorage = JSON.parse(localStorage.getItem('storageItem'))
+  textarea.value = getStorage.todoItem9
+  addP.text(`${getStorage.todoItem9}`)
+  
+}
 for (let i = 0; i < btn.length; i++) { 
   btn[i].addEventListener('click', function (e) { 
     e.preventDefault();
-    let storageItem = textarea[i].value;
-    localStorage.setItem('storageItem', storageItem);
-    textarea.value = renderStorage();
-    console.log(textarea.value);
+    saveStorage()
     addP.text(`
     The item already storages in local storage: 
-    ${renderStorage()}
     ${dayjs().format('MMMM-dddd-YYYY')}
     `) 
- 
+    renderStorage()
   })
+
 }
+renderStorage()
+
 
