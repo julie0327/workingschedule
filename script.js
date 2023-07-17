@@ -21,12 +21,12 @@ $(function () {
   //
   // TODO: Add code to display the current date in the header of the page.
 });
-let btn = $('button')
-let addP = $('#currentDay')
-let textarea = document.querySelectorAll('textarea')
-function dispalyTime() { 
-  let current = dayjs().format('MMMM-dddd-YYYY')
-  addP.text(current)
+let btn = $("button");
+let addP = $("#currentDay");
+let textarea = document.querySelectorAll("textarea");
+function dispalyTime() {
+  let current = dayjs().format("MMMM-dddd-YYYY");
+  addP.text(current);
 }
 function matchID() {
   let idList = [
@@ -49,21 +49,21 @@ function matchID() {
   for (let i = 0; i < idList.length; i++) {
     console.log(idList[i]);
     console.log(idList[i].attr("id"));
-    let lastNum =parseInt(idList[i].attr("id").replace(/[^\d]/g, " "));
-    if (lastNum >= 1 && lastNum <= 5) { 
-      lastNum = lastNum + 12
+    let lastNum = parseInt(idList[i].attr("id").replace(/[^\d]/g, " "));
+    if (lastNum >= 1 && lastNum <= 5) {
+      lastNum = lastNum + 12;
     }
-      console.log(`listNumber is ${lastNum}`);
-    if (matchCurrentTime >= 1 && matchCurrentTime <= 9) { 
+    console.log(`listNumber is ${lastNum}`);
+    if (matchCurrentTime >= 1 && matchCurrentTime < 9) {
       matchCurrentTime = matchCurrentTime + 12;
       console.log(`currnet time is ${matchCurrentTime}`);
-    } 
+    }
     if (matchCurrentTime === lastNum) {
-      idList[i].addClass("present");//red
+      idList[i].addClass("present"); //red
     } else if (lastNum < matchCurrentTime) {
-      idList[i].addClass("past");//gray
+      idList[i].addClass("past"); //gray
     } else if (lastNum > matchCurrentTime) {
-      idList[i].addClass("future");//green
+      idList[i].addClass("future"); //green
     }
   }
 }
@@ -81,31 +81,26 @@ function saveStorage() {
     todoItem4: textarea[7].value,
     todoItem5: textarea[8].value,
   };
-  localStorage.setItem('storageItem', JSON.stringify(storageItem));
-  return storageItem
+  localStorage.setItem("storageItem", JSON.stringify(storageItem));
+  return storageItem;
 }
-function renderStorage() { 
-  addP.text(dispalyTime())
-  addP
-  let getStorage = JSON.parse(localStorage.getItem('storageItem'))
-  textarea[0].value = getStorage.todoItem9
-  textarea[1].value = getStorage.todoItem10
-  textarea[2].value = getStorage.todoItem11
-  textarea[3].value = getStorage.todoItem12
-  textarea[4].value = getStorage.todoItem1
-  textarea[5].value = getStorage.todoItem2
-  textarea[6].value = getStorage.todoItem3
-  textarea[7].value = getStorage.todoItem4
-  textarea[8].value = getStorage.todoItem5
-  
-  
+function renderStorage() {
+  addP.text(dispalyTime());
+  let getStorage = JSON.parse(localStorage.getItem("storageItem"));
+  textarea[0].value = getStorage.todoItem9;
+  textarea[1].value = getStorage.todoItem10;
+  textarea[2].value = getStorage.todoItem11;
+  textarea[3].value = getStorage.todoItem12;
+  textarea[4].value = getStorage.todoItem1;
+  textarea[5].value = getStorage.todoItem2;
+  textarea[6].value = getStorage.todoItem3;
+  textarea[7].value = getStorage.todoItem4;
+  textarea[8].value = getStorage.todoItem5;
 }
-for (let i = 0; i < btn.length; i++) { 
-  btn[i].addEventListener('click', function (e) { 
+for (let i = 0; i < btn.length; i++) {
+  btn[i].addEventListener("click", function (e) {
     e.preventDefault();
-    saveStorage()
-  })
+    saveStorage();
+  });
 }
-renderStorage()
-
-
+renderStorage();
