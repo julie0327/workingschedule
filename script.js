@@ -24,7 +24,7 @@ $(function () {
   let addP = $("#currentDay");
   let textarea = $("textarea");
 
-  function dispalyTime() {
+  function dispalyTime() { 
     $("header").css({
       display: "flex",
       "flex-direction": "column",
@@ -33,8 +33,8 @@ $(function () {
     let current = dayjs().format("MMMM-dddd-YYYY");
     addP.text(current);
   }
-  function matchID() {
-    let idList = [
+function matchTime(){ 
+ let idList = [
       $("#hour-9"),
       $("#hour-10"),
       $("#hour-11"),
@@ -71,42 +71,31 @@ $(function () {
         idList[i].addClass("future"); //green
       }
     }
-  }
-  matchID();
-
-  function saveStorage() {
-    let storageItem = {
-      todoItem9: textarea[0].value,
-      todoItem10: textarea[1].value,
-      todoItem11: textarea[2].value,
-      todoItem12: textarea[3].value,
-      todoItem1: textarea[4].value,
-      todoItem2: textarea[5].value,
-      todoItem3: textarea[6].value,
-      todoItem4: textarea[7].value,
-      todoItem5: textarea[8].value,
-    };
-    localStorage.setItem("storageItem", JSON.stringify(storageItem));
-    return storageItem;
+}
+  matchTime()
+  function saveStorage(index) {
+    let getStorage = JSON.parse(localStorage.getItem('storageItem')) || {};
+    getStorage[`todoItem${index}`] = textarea[index].value;
+    localStorage.setItem("storageItem", JSON.stringify(getStorage));
   }
   function renderStorage() {
     addP.text(dispalyTime());
     let getStorage = JSON.parse(localStorage.getItem("storageItem"));
     if (getStorage) {
-      textarea[0].value = getStorage.todoItem9 || "";
-      textarea[1].value = getStorage.todoItem10 || "";
-      textarea[2].value = getStorage.todoItem11 || "";
-      textarea[3].value = getStorage.todoItem12 || "";
-      textarea[4].value = getStorage.todoItem1 || "";
-      textarea[5].value = getStorage.todoItem2 || "";
-      textarea[6].value = getStorage.todoItem3 || "";
-      textarea[7].value = getStorage.todoItem4 || "";
-      textarea[8].value = getStorage.todoItem5 || "";
+      textarea[0].value = getStorage.todoItem0 || "";
+      textarea[1].value = getStorage.todoItem1 || "";
+      textarea[2].value = getStorage.todoItem2 || "";
+      textarea[3].value = getStorage.todoItem3 || "";
+      textarea[4].value = getStorage.todoItem4 || "";
+      textarea[5].value = getStorage.todoItem5 || "";
+      textarea[6].value = getStorage.todoItem6 || "";
+      textarea[7].value = getStorage.todoItem7 || "";
+      textarea[8].value = getStorage.todoItem8 || "";
     }
   }
-  btn.each(function () {
+  btn.each(function (index) {
     $(this).click(function () {
-      saveStorage();
+      saveStorage(index);
     });
   });
   renderStorage();
